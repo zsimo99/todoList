@@ -1,0 +1,73 @@
+<%- include('partials/headers')-%>
+<div class="form-container">
+  <form class="auth-form">
+    <h1>Sign Up</h1>
+    <div class="form-cont">
+      <input autocomplete="off" type="text" name="name" />
+      <label for="name">Your Name</label>
+    </div>
+    <div class="error name"></div>
+    <div class="form-cont">
+      <input autocomplete="off" type="text" name="email" />
+      <label for="email">Your Email</label>
+    </div>
+    <div class="error email"></div>
+    <div class="form-cont">
+      <input type="password" name="password" />
+      <label for="password">Your Password</label>
+    </div>
+    <div class="error password"></div>
+    <div class="form-cont">
+      <input type="password" name="password2" />
+      <label for="password2">Confirme Your Password</label>
+    </div>
+    <div class="error password2"></div>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<script>
+  // style
+
+  const errorName = document.querySelector(".error.name");
+  const errorEmail = document.querySelector(".error.email");
+  const errorPassword = document.querySelector(".error.password");
+  const errorPassword2 = document.querySelector(".error.password2");
+  const form = document.querySelector(".auth-form");
+  
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    errorName.textContent = "";
+    errorEmail.textContent = "";
+    errorPassword.textContent = "";
+    errorPassword2.textContent = "";
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const password2 = form.password2.value;
+    if (password != password2) {
+      errorPassword2.textContent = "ur password is incorrect";
+    } else {
+      try {
+        const res = await fetch("/signup", {
+          body: JSON.stringify({ name, email, password }),
+          method: "POST",
+          headers: { "content-type": "application/json" },
+        });
+        const data=await res.json()
+        if(data.user){
+          location.assign("/mylist")
+        }
+        if(data.err){
+          errorName.textContent=data.err.name
+          errorEmail.textContent=data.err.email
+          errorPassword.textContent=data.err.password
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
+</script>
+<%- include('partials/footer')-%>

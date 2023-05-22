@@ -1,0 +1,23 @@
+<%- include('partials/headers')-%>
+<div class="form-container">
+  <div class="app-box">
+    <form class="my-list">
+      <h1 class="list-header">My List</h1>
+      <div class="list-body">
+        <%if(list){%> <%for(let i=0;i < list.length;i++){%>
+        <div class="item">
+          <p><%=list[i].title%></p>
+          <button name="id" value="<%=list[i]._id%>" class="dis-btn see">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <%}%> <%}%>
+      </div>
+    </form>
+
+    <form class="add-item">
+      <button class="btn btn-primary show-popup">Add Item</button>
+    </form>
+  </div>
+</div>
+<%- include('partials/footer')-%>

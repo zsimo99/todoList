@@ -1,0 +1,15 @@
+<%- include('partials/headers')-%>
+<div class="item-cont">
+  <div class="item-box">
+    <%if(item){%>
+    <h1><%=item.title%></h1>
+    <p><%=item.content%></p>
+    <%}%>
+    <div class="btn-cont">
+        <button class="update">Update<i class="fas fa-pencil-alt"></i></button>
+        <button class="delete">Delete<i class="fas fa-trash-alt"></i></button>
+    </div>
+    <button class="back"><i class="fas fa-backspace"></i></button>
+  </div>
+</div>
+<%- include('partials/footer')-%>

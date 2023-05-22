@@ -1,0 +1,53 @@
+<%- include('partials/headers')-%>
+<div class="form-container">
+  <form class="auth-form">
+    <h1>Log In</h1>
+    <div class="form-cont">
+      <input autocomplete="off" type="text" name="email" />
+      <label for="email">Your Email</label>
+    </div>
+    <div class="error email"></div>
+    <div class="form-cont">
+      <input type="password" name="password" />
+      <label for="password">Your Password</label>
+    </div>
+    <div class="error password"></div>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<script>
+  // style
+
+  const errEmail = document.querySelector(".error.email");
+  const errPassword = document.querySelector(".error.password");
+  const form = document.querySelector(".auth-form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errEmail.textContent = "";
+    errPassword.textContent = "";
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      const res = await fetch("/login", {
+        body: JSON.stringify({ email, password }),
+        method: "POST",
+        headers: { "content-type": "application/json" },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.user) {
+        location.assign("/mylist");
+      }
+      if (data.err) {
+        errEmail.textContent = data.err.email;
+        errPassword.textContent = data.err.password;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+</script>
+<%- include('partials/footer')-%>
