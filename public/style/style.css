@@ -1,17 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 :root{
-    --primary-color:#E57C23;
-    --primary-color-hover:#cc6610;
-    --secondary-color:#E8AA42;
-    --background-color:#F8F1F1;
-    --dark-background-color:#025464;
-    --dark-background-color-hover:#024653;
+    --primary-color:#6366f1;
+    --primary-color-hover:#4f46e5;
+    --secondary-color:#f59e0b;
+    --secondary-color-hover:#d97706;
+    --background-color:#f8fafc;
+    --dark-background-color:#1e293b;
+    --dark-background-color-hover:#0f172a;
+    --success-color:#10b981;
+    --danger-color:#ef4444;
+    --text-primary:#1e293b;
+    --text-secondary:#64748b;
+    --card-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    --card-shadow-hover: 0 20px 50px rgba(0,0,0,0.15);
 }
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 li{
     list-style: none;
@@ -19,6 +26,7 @@ li{
 a{
     text-decoration: none;
     color: inherit;
+    transition: all 0.3s ease;
 }
 /* component */
 /* popup */
@@ -35,7 +43,8 @@ a{
 }
 .popup-cont::before{
     content: "";
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
     position: absolute;
     top: 0;
     left: 0;
@@ -45,31 +54,51 @@ a{
 }
 .popup-cont .popup-box{
     position: relative;
-    padding: 30px;
+    padding: 40px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    animation: popupSlide 0.3s ease;
+}
+@keyframes popupSlide{
+    from{
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 .popup-cont .popup-box .remove{
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
-    top: 0;
-    right: 0;
-    background-color: red;
+    width: 32px;
+    height: 32px;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(135deg, var(--danger-color), #dc2626);
     color: white;
-    border-radius:50% ;
+    border-radius: 50%;
     cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    transition: all 0.3s ease;
+}
+.popup-cont .popup-box .remove:hover{
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 .form-container{
-    min-height: calc(100vh - (68px + 35px));
+    min-height: calc(100vh - (70px + 50px));
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    
 }
 .dis-btn{
     background-color: transparent;
@@ -78,147 +107,223 @@ a{
 .btn{
     border: none;
     background-color: none;
-    display: block;
-    padding: 10px 18px;
-    border-radius: 10px;
-    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
     width: fit-content;
     cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.3px;
 }
 .btn.btn-primary{
-    background-color: var(--dark-background-color);
-    color: var(--background-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-hover));
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
 .btn.btn-primary:hover{
-    background-color: var(--dark-background-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
 }
 .btn.btn-secondary{
-    background-color: var(--primary-color);
-    color: var(--background-color);
+    background: linear-gradient(135deg, var(--secondary-color), var(--secondary-color-hover));
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
 }
 .btn.btn-secondary:hover{
-    background-color: var(--primary-color-hover);
-    
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
 }
 body{
-    background-color: var(--background-color);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
 }
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #fff;
-    height: 68px;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 header .brand{
     color: var(--primary-color);
-    letter-spacing: .5px;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+}
+header .brand h1{
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 header ul {
     display: flex;
-    gap: 25px;
+    gap: 15px;
+    align-items: center;
+}
+header ul h4.btn{
+    background: transparent;
+    color: var(--text-secondary);
+    box-shadow: none;
+    padding: 8px 16px;
 }
 main{
-height: calc(100vh - (68px + 35px));
-position: relative;
-background-image: url("../images/mountains-gc5301531c_1280.jpg") ;
-background-size: cover;
-
+    min-height: calc(100vh - (70px + 50px));
+    position: relative;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(99, 102, 241, 0.8)), url("../images/mountains-gc5301531c_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
 }
 main .hero{
-    width: calc(100% - 40px);
-    position: absolute;
-    top: 80px;
-    left: 40px;
-    background-color: #025464bf;
-    padding: 50px;
+    width: calc(100% - 80px);
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 60px;
     color: #fff;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--card-shadow);
 }
 main .hero .text{
     max-width: 800px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 main .hero .text h1{
-    color: var(--secondary-color);
-    margin-bottom: 20px;
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
 }
 main .hero .text p{
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 300;
 }
 footer{
-    height: 35px;
+    height: 50px;
     color: #fff;
-    background-color: var(--dark-background-color);
+    background: linear-gradient(135deg, var(--dark-background-color), var(--dark-background-color-hover));
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
 }
 footer span{
     color: var(--secondary-color);
+    font-weight: 600;
 }
 
 /* auth */
 
 
 .auth-form{
-    background-color: #fff ;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 5px 5px 10px 1px var(--dark-background-color);
+    background: #fff;
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0,0,0,0.05);
+    min-width: 380px;
+    transition: all 0.3s ease;
+}
+.auth-form:hover{
+    box-shadow: var(--card-shadow-hover);
 }
 .auth-form h1{
-    color: var(--primary-color);
+    color: var(--text-primary);
     margin-bottom: 40px;
     text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.auth-form h1::after{
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    margin: 15px auto 0;
+    border-radius: 2px;
 }
 .form-cont{
     position: relative;
+    margin-bottom: 8px;
 }
 .form-cont + .error{
-    font-size: 13px;
-    margin-top: 5px ;
+    font-size: 12px;
+    margin-top: 5px;
     margin-bottom: 20px;
-    color: rgba(255, 0, 0, 0.666);
+    color: var(--danger-color);
+    font-weight: 500;
 }
 .form-cont label{
     position: absolute;
-    
-    color: var(--secondary-color);
+    color: var(--text-primary);
     top: 50%;
     transform: translateY(-50%);
-    left: 10px;
+    left: 16px;
     user-select: none;
-    transition: all .3s;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 4;
+    pointer-events: none;
 }
 .form-cont input{
     position: relative;
     z-index: 3;
-    width: 300px;
-    background-color: transparent;
-    padding: 12px 5px 12px 20px;
-    border-radius: 10px;
-    border: 1px solid var(--dark-background-color);
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
 }
 .form-cont input:focus{
     outline: none;
+    border-color: var(--primary-color);
+    background-color: #fff;
 }
 .form-cont input:focus + label{
     z-index: 5;
     background-color: white;
-    padding: 0 1px;
+    padding: 0 8px;
     width: fit-content;
     font-size: 12px;
     top: 0;
+    color: var(--primary-color);
 }
 .fix-label{
     z-index: 5;
     background-color: white;
-    padding: 0 1px;
+    padding: 0 8px;
     width: fit-content;
     font-size: 12px;
     top: 0 !important;
+    color: var(--primary-color);
+}
+.auth-form .btn{
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px 24px;
+    font-size: 16px;
 }
 
 
@@ -226,54 +331,100 @@ footer span{
 /* ********************************* */
 
 .app-box{
-    background-color: #fff;
-    
-    border-radius: 20px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    min-width: 550px;
+    transition: all 0.3s ease;
+}
+.app-box:hover{
+    box-shadow: var(--card-shadow-hover);
 }
 .my-list{
-    padding: 30px;
+    padding: 40px;
 }
 .my-list .list-header{
     position: relative;
-    color: var(--primary-color);
-    margin-bottom: 30px;
+    color: var(--text-primary);
+    margin-bottom: 35px;
     text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 .my-list .list-header::before{
     content: "";
     position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: var(--primary-color);
-    bottom: -10px;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
+    border-radius: 2px;
 }
 .my-list .list-body{
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.my-list .list-body::-webkit-scrollbar{
+    width: 6px;
+}
+.my-list .list-body::-webkit-scrollbar-track{
+    background: var(--background-color);
+    border-radius: 10px;
+}
+.my-list .list-body::-webkit-scrollbar-thumb{
+    background: var(--primary-color);
+    border-radius: 10px;
 }
 .my-list .list-body .item{
     display: flex;
-    background-color: var(--background-color);
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
     justify-content: space-between;
-    font-size: 18px;
-    border: 2px solid var(--dark-background-color);
-    border-radius: 20px;
-    padding: 12px 15px;
-    min-width: 500px;
-    margin-bottom: 20px;
+    align-items: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 20px;
+    min-width: 450px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.my-list .list-body .item:hover{
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 .my-list .list-body .item p{
-    color: #444;
+    color: var(--text-primary);
+    font-weight: 500;
 }
 .my-list .list-body .item svg{
     cursor: pointer;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+.my-list .list-body .item svg:hover{
+    transform: scale(1.2);
+    color: var(--primary-color-hover);
 }
 .add-item{
-    background-color: var(--secondary-color);
-    padding: 20px;
-    border-radius: 0 0 20px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-hover));
+    padding: 20px 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+.add-item .btn{
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+}
+.add-item .btn:hover{
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
 }
 .see{
     position: relative;
@@ -289,95 +440,175 @@ footer span{
 
 /* item  */
 .item-cont{
-    min-height: calc(100vh - (68px + 35px));
+    min-height: calc(100vh - (70px + 50px));
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 .item-cont .item-box{
     position: relative;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 30px;
-    width: 500px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 24px;
+    width: 520px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+.item-cont .item-box:hover{
+    box-shadow: var(--card-shadow-hover);
 }
 .item-cont .item-box h1{
-    color: var(--dark-background-color);
+    color: var(--text-primary);
     margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 .item-cont .item-box p{
-    
-    color: #888;
-    line-height: 1.6;
-    font-weight:100;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-weight: 400;
     font-size: 15px;
+    margin-bottom: 25px;
 }
 .item-cont .item-box .btn-cont{
-    text-align: right;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
 }
 .item-cont .item-box .btn-cont button{
     background-color: transparent;
     position: relative;
     z-index: 1;
-    padding: 6px 10px;
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 10px;
-    transition: .3s;
-    width: 100px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 14px;
 }
 .item-cont .item-box .btn-cont button.delete{
-    border: 3px solid red;
-    color: red;
+    border: 2px solid var(--danger-color);
+    color: var(--danger-color);
+}
+.item-cont .item-box .btn-cont button.delete:hover{
+    background: var(--danger-color);
+    color: #fff;
 }
 .item-cont .item-box .btn-cont button.update{
-    border: 3px solid green;
-    color: green;
+    border: 2px solid var(--success-color);
+    color: var(--success-color);
 }
-.item-cont .item-box .btn-cont button::before{
-    content: "";
-    position: absolute;
-    z-index: -1;
-    height: 100%;
-    width: 0;
-    top: 0;
-    left: 0;
-    transition: .3s;
-    
-}
-.item-cont .item-box .btn-cont button.update::before{
-    background-color: green;
-}
-.item-cont .item-box .btn-cont button.delete::before{
-    background-color: red;
-}
-.item-cont .item-box .btn-cont button:hover{
-    color: white;
-}
-.item-cont .item-box .btn-cont button:hover::before{
-    width: 100%;
+.item-cont .item-box .btn-cont button.update:hover{
+    background: var(--success-color);
+    color: #fff;
 }
 .item-cont .item-box .btn-cont button svg{
     margin-left: 5px;
 }
 .item-cont .item-box .back{
     cursor: pointer;
-    font-size: 18px;
-    background-color: #fff;
-    border: 8px solid var(--background-color);
-    color: var(--primary-color);
+    font-size: 16px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color-hover));
+    border: 4px solid var(--background-color);
+    color: #fff;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     top: 0;
     right: 0;
     transform: translate(20%,-20%);
-    transition: .3s;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
 .item-cont .item-box .back:hover{
-    color: var(--primary-color-hover);
+    transform: translate(20%,-20%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    header .brand h1 {
+        font-size: 1.4rem;
+    }
+    header ul {
+        gap: 8px;
+    }
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    main .hero {
+        width: calc(100% - 40px);
+        padding: 40px 30px;
+        border-radius: 20px;
+    }
+    main .hero .text h1 {
+        font-size: 2rem;
+    }
+    main .hero .text p {
+        font-size: 15px;
+    }
+    .auth-form {
+        min-width: auto;
+        width: 100%;
+        max-width: 350px;
+        padding: 40px 30px;
+    }
+    .app-box {
+        min-width: auto;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 20px;
+    }
+    .my-list .list-body .item {
+        min-width: auto;
+        width: 100%;
+    }
+    .item-cont .item-box {
+        width: calc(100% - 40px);
+        max-width: 500px;
+    }
+    .popup-cont .popup-box {
+        width: calc(100% - 40px);
+        max-width: 400px;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+    main .hero {
+        width: calc(100% - 20px);
+        padding: 30px 20px;
+    }
+    main .hero .text h1 {
+        font-size: 1.6rem;
+    }
+    .form-container {
+        padding: 40px 15px;
+    }
+    .my-list {
+        padding: 25px;
+    }
+    .item-cont .item-box .btn-cont {
+        flex-direction: column;
+    }
+    .item-cont .item-box .btn-cont button {
+        width: 100%;
+    }
 }

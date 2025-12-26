@@ -2,6 +2,8 @@ require("express-async-errors")
 const express=require("express")
 const connectDb=require("./db/connect")
 const cookieParser=require("cookie-parser")
+const dotenv=require("dotenv")
+dotenv.config()
 
 
 const authRoute=require("./routes/authRoutes")
@@ -11,7 +13,8 @@ const listRoute=require("./routes/listRoutes")
 const errorHandlerMiddleware=require("./middlewares/errorHandler")
 const {requireAuth,checkUser}=require("./middlewares/authMiddleware")
 
-const dbURI = 'mongodb+srv://admin-zsimo:12345@cluster0.xrtfhyt.mongodb.net/todo-list';
+const dbURI = process.env.DATA_URI ;
+console.log(dbURI)
 const port =process.env.PORT || 3000
 
 
