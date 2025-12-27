@@ -4,6 +4,7 @@ const connectDb=require("./db/connect")
 const cookieParser=require("cookie-parser")
 const dotenv=require("dotenv")
 dotenv.config()
+console.log("Node version:", process.version);
 
 
 const authRoute=require("./routes/authRoutes")
